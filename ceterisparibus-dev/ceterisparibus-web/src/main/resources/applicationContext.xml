@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+            http://www.springframework.org/schema/jdbc
+            http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.waszczyk.ceterisparibus"/>
+    <tx:annotation-driven/>
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/api/**" location="/api/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <bean class="com.mangofactory.swagger.configuration.DocumentationConfig"/>
+
+    <bean id="dataSource2" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:postgresql://localhost:5432/tradedbtest</value>
+        </property>
+        <property name="username">
+            <value>postgres</value>
+        </property>
+        <property name="password">
+            <value>postgres</value>
+        </property>
+    </bean>
+
+    <bean id="fxDataFeederEURUSD" class="com.waszczyk.ceterisparibus.datafeeds.OandaDataFeedEurUsdM15">
+        <constructor-arg value="EUR_USD"/>
+        <constructor-arg value="2"/>
+        <constructor-arg value="M15"/>
+    </bean>
+
+    <bean id="fxDataFeederGBPUSD" class="com.waszczyk.ceterisparibus.datafeeds.OandaDataFeedGbpUsdM15"
+          depends-on="fxDataFeederEURUSD">
+        <constructor-arg value="GBP_USD"/>
+        <constructor-arg value="2"/>
+        <constructor-arg value="M15"/>
+    </bean>
+
+    <bean id="fxDataFeederEURJPY" class="com.waszczyk.ceterisparibus.datafeeds.OandaDataFeedEurJpyM15"
+          depends-on="fxDataFeederUSDJPY">
+        <constructor-arg value="EUR_JPY"/>
+        <constructor-arg value="2"/>
+        <constructor-arg value="M15"/>
+    </bean>
+    <bean id="fxDataFeederUSDCHF" class="com.waszczyk.ceterisparibus.datafeeds.OandaDataFeedUsdChfM15"
+          depends-on="fxDataFeederGBPUSD">
+        <constructor-arg value="USD_CHF"/>
+        <constructor-arg value="2"/>
+        <constructor-arg value="M15"/>
+    </bean>
+    <bean id="fxDataFeederUSDJPY" class="com.waszczyk.ceterisparibus.datafeeds.OandaDataFeedUsdJpyM15"
+          depends-on="fxDataFeederUSDCHF">
+        <constructor-arg value="USD_JPY"/>
+        <constructor-arg value="2"/>
+        <constructor-arg value="M15"/>
+    </bean>
+    <bean id="fxDataFeederAUDUSD" class="com.waszczyk.ceterisparibus.datafeeds.OandaDataFeedAudUsdM15"
+          depends-on="fxDataFeederEURJPY">
+        <constructor-arg value="AUD_USD"/>
+        <constructor-arg value="2"/>
+        <constructor-arg value="M15"/>
+    </bean>
+
+    <!-- SET default mail properties -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="25"/>
+        <property name="username" value="boomattache@gmail.com"/>
+        <property name="password" value="Boomattache@89"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- You can have some pre-configured messagess also which are ready to send -->
+    <bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="to" value="boomattache@gmail.com"></property>
+        <property name="from" value="twaszczyk@gmail.com"></property>
+        <property name="subject" value="FATAL - Application crash. Save your job !!"/>
+    </bean>
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:dataSource-ref="dataSource2" p:persistenceUnitName="JpaPersistenceUnit"/>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+
+</beans>

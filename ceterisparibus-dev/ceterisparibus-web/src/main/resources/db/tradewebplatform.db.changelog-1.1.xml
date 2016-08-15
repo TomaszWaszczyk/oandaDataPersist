@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="wato" id="5">
+		<createTable tableName="CANDLE_CONTAINER_EURUSD_M15">
+			<column autoIncrement="true" name="candleContainer_EURUSD_M15Id"
+				type="bigserial">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="instrument" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="granularity" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="CANDLE_EURUSD_M15">
+			<column autoIncrement="true" name="candleId" type="bigserial">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="time" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="openBid" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="openAsk" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="highBid" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="highAsk" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="lowBid" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="lowAsk" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="closeBid" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="closeAsk" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="volume" type="decimal">
+				<constraints nullable="false" />
+			</column>
+			<column name="complete" type="boolean">
+				<constraints nullable="false" />
+			</column>
+			<column name="candleContainer_EURUSD_M15Id" type="bigserial">
+				<!-- <constraints nullable="false"/> -->
+				<constraints unique="true"/>
+			</column>
+
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="6" author="wato">
+				<addForeignKeyConstraint baseColumnNames="candleContainer_EURUSD_M15Id"
+				baseTableName="CANDLE_CONTAINER_EURUSD_M15" constraintName="FKasdasdasd"
+				deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+				onUpdate="RESTRICT" referencedColumnNames="candleContainer_EURUSD_M15Id"
+				referencedTableName="CANDLE_EURUSD_M15" />
+	</changeSet>
+</databaseChangeLog>

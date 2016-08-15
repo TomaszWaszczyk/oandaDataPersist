@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.waszczyk.ceterisparibus</groupId>
+		<artifactId>ceterisparibus</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../ceterisparibus/pom.xml</relativePath>
+	</parent>
+	<groupId>com.waszczyk.ceterisparibus.service</groupId>
+	<artifactId>ceterisparibus-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>com.waszczyk.ceterisparibus.daomodel</groupId>
+			<artifactId>ceterisparibus-daomodel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.waszczyk.ceterisparibus.common</groupId>
+			<artifactId>ceterisparibus-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.waszczyk.ceterisparibus.datafeeds</groupId>
+			<artifactId>ceterisparibus-datafeeds</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.3.2</version>
+		</dependency>
+	</dependencies>
+</project>

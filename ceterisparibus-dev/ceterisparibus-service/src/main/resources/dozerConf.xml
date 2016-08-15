@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<configuration>
+		<date-format>MM/dd/yyyy HH:mm</date-format>
+	</configuration>
+	<mapping>
+		<class-a>com.waszczyk.ceterisparibus.model.Roles</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.RolesDTO</class-b>
+		<field>
+			<a>role</a>
+			<b>role</b>
+		</field>
+		<field type="one-way">
+			<a>roleId</a>
+			<b>roleId</b>
+		</field>
+	</mapping>
+
+	<mapping>
+		<class-a>com.waszczyk.ceterisparibus.model.Participant</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.ParticipantDTO</class-b>
+		<field>
+			<a>userId</a>
+			<b>participantId</b>
+		</field>
+		<field>
+			<a>leagueNo</a>
+			<b>leagueNo</b>
+		</field>
+		<field>
+			<a>points</a>
+			<b>points</b>
+		</field>
+	</mapping>
+
+	<mapping>
+		<class-a>com.waszczyk.ceterisparibus.model.League</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.LeagueDTO</class-b>
+		<field type="one-way">
+			<a>leagueId</a>
+			<b>leagueId</b>
+		</field>
+		<field>
+			<a>leagueStatus</a>
+			<b>leagueStatus</b>
+		</field>
+		<field>
+			<a>drawAwailable</a>
+			<b>drawAwailable</b>
+		</field>
+	</mapping>
+
+	<mapping>
+		<class-a>com.waszczyk.ceterisparibus.model.Users</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.UsersDTO</class-b>
+		<field>
+			<a>userId</a>
+			<b>userId</b>
+		</field>
+		<field>
+			<a>username</a>
+			<b>username</b>
+		</field>
+		<field>
+			<a>enabled</a>
+			<b>enabled</b>
+		</field>
+	</mapping>
+
+	<mapping>
+		<class-a>com.waszczyk.ceterisparibus.model.Game</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.GameSimpleDTO</class-b>
+		<field type="one-way">
+			<a>gameId</a>
+			<b>gameId</b>
+		</field>
+		<field>
+			<a>gameDate</a>
+			<b>gameDate</b>
+		</field>
+		<field>
+			<a>leagueNo</a>
+			<b>leagueNo</b>
+		</field>
+		<field>
+			<a>participant1id</a>
+			<b>participant1id</b>
+		</field>
+		<field>
+			<a>p1points</a>
+			<b>p1points</b>
+		</field>
+		<field>
+			<a>participant2id</a>
+			<b>participant2id</b>
+		</field>
+		<field>
+			<a>p2points</a>
+			<b>p2points</b>
+		</field>
+		<field>
+			<a>winner</a>
+			<b>winner</b>
+		</field>
+	</mapping>
+
+	<mapping>
+		<class-a>com.waszczyk.ceterisparibus.model.Game</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.GameDTO</class-b>
+		<field type="one-way">
+			<a>gameId</a>
+			<b>gameId</b>
+		</field>
+		<field>
+			<a>gameDate</a>
+			<b>gameDate</b>
+		</field>
+		<field>
+			<a>leagueNo</a>
+			<b>leagueNo</b>
+		</field>
+		<field>
+			<a>participant1id</a>
+			<b>participant1id</b>
+		</field>
+		<field>
+			<a>p1points</a>
+			<b>p1points</b>
+		</field>
+		<field>
+			<a>participant2id</a>
+			<b>participant2id</b>
+		</field>
+		<field>
+			<a>p2points</a>
+			<b>p2points</b>
+		</field>
+		<field>
+			<a>winner</a>
+			<b>winner</b>
+		</field>
+		<field>
+			<a>p1accept</a>
+			<b>p1accept</b>
+		</field>
+		<field>
+			<a>p2accept</a>
+			<b>p2accept</b>
+		</field>
+		<field>
+			<a>acceptFail</a>
+			<b>acceptFail</b>
+		</field>
+	</mapping>
+	
+	<mapping map-id="history">
+		<class-a>com.waszczyk.ceterisparibus.model.History</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.HistoryDTO</class-b>
+		<field type="one-way">
+			<a>historyId</a>
+			<b>historyId</b>
+		</field>
+		<field>
+			<a>gameDate</a>
+			<b>gameDate</b>
+		</field>
+		<field>
+			<a>league</a>
+			<b>league</b>
+		</field>
+		<field>
+			<a>opponent</a>
+			<b>opponent</b>
+		</field>
+		<field>
+			<a>participantPoints</a>
+			<b>participantPoints</b>
+		</field>
+		<field>
+			<a>pointsTotal</a>
+			<b>pointsTotal</b>
+		</field>
+		<field>
+			<a>status</a>
+			<b>status</b>
+		</field>
+		<field>
+			<a>userId</a>
+			<b>userId</b>
+		</field>
+	</mapping>
+	
+	<mapping map-id="candleContainer">
+		<class-a>com.waszczyk.ceterisparibus.model.OandaCandleHolderEurUsdM15</class-a>
+		<class-b>com.waszczyk.ceterisparibus.dto.CandleContainerDTO</class-b>
+		<field type="one-way">
+			<a>candleContainer_EURUSD_M15Id</a>
+			<b>candleContainer_EURUSD_M15Id</b>
+		</field>
+		<field>
+			<a>instrument</a>
+			<b>instrument</b>
+		</field>
+		<field>
+			<a>granularity</a>
+			<b>granularity</b>
+		</field>
+		<field>
+			<a>candles</a>
+			<b>candles</b>
+		</field>
+	</mapping>
+	
+</mappings>
